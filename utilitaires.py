@@ -3,8 +3,8 @@
 Module de départ du TP2 : il reprend tel quel le fichier utilitaires.py du
 Cours 07 (Café Le Binaire). Vous devez le compléter selon l'énoncé.
 
-Auteur(s) : __________ et __________
-Date      : __________
+Auteur(s) : Francis St-Cyr et Émile Bousquet
+Date      : 03 novembre 2026
 """
 
 # ---------------------------------------------------------------------------
@@ -84,6 +84,14 @@ def lire_oui_non(message):
     return reponse == "o"
 
 def lire_texte(message):
+    """Pose une question fermée jusqu'à obtenir une réponse non-vide.
+
+    Args:
+        message (str): La question affichée à l'utilisateur.
+
+    Returns:
+        string: Le texte saisi par l'utilisateur
+    """
     nom = input(message).strip()
     while nom == "":
         print("Le nom ne peut pas être vide.")
