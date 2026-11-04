@@ -82,7 +82,18 @@ def est_bonne_reponse(reponse, capitale):
 
 
 def calculer_pourcentage(nb_bonnes, nb_questions):
-    pourcentage = nb
+    pourcentage = (nb_bonnes * 100) // nb_questions
+
+
+def jouer_partie(lieux, capitales, nb_questions, nom):
+    for i in range (len(nb_questions)):
+        print(f"Question {i + 1} de {nb_questions} - {lieu}")
+        valide = False
+        while not valide:
+            try:
+                capitale = input(f"Capitale : ")
+                
+        
 
 
 
