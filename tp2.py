@@ -21,6 +21,13 @@ from donnees_tp2 import PAYS, CAPITALES_PAYS, PROVINCES, CAPITALES_PROVINCES, ET
 ######################################################
 
 ######################################################
+#Variables
+liste_standard= []
+liste_standard_reponse = []
+liste_aventure = []
+liste_aventure_reponse = []
+######################################################
+######################################################
 #Fonctions
 def afficher_menu(titre, options):
     """Affiche le menu selon l'option. 
@@ -53,22 +60,25 @@ def afficher_bienvenue():
 
 
 def construire_listes(mode):
-    liste_pays= []
-    liste_capitales_pays = []
-    liste_provinces = []
-    liste_capitales_provinces = []
-    liste_etats = []
-    liste_capitales_etats = []
     if mode == 1:
-        liste_pays.append(PAYS)
-        liste_capitales_pays.append(CAPITALES_PAYS)
+        return PAYS, CAPITALES_PAYS
     elif mode == 2:
-         liste_pays.append(PAYS)
-         liste_capitales_pays.append(CAPITALES_PAYS)
-         liste_provinces.append(PROVINCES)
-         liste_capitales_provinces.append(CAPITALES_PROVINCES)
-         liste_etats.append(ETATS)
-         liste_capitales_etats.append(CAPITALES_ETATS)
+        liste_aventure = PAYS + PROVINCES + ETATS
+        liste_aventure_reponse = CAPITALES_PAYS + CAPITALES_PROVINCES + CAPITALES_ETATS
+        return liste_aventure, liste_aventure_reponse
+
+liste_retour = construire_listes(1)
+liste_standard = liste_retour[0]
+liste_standard_reponse = liste_retour[1]
+
+liste_retour = construire_listes(2)
+liste_aventure = liste_retour[0]
+liste_aventure_reponse = liste_retour[1]
+
+
+def est_bonne_reponse(reponse, capitale):
+    print("yo")
+
 
 
 def calculer_pourcentage(nb_bonnes, nb_questions):
@@ -88,14 +98,16 @@ def calculer_pourcentage(nb_bonnes, nb_questions):
 
 ######################################################
 #Fonction Main()
-valeur_mode = afficher_menu("MODE DE JEU", 2)
-print(valeur_mode)
-valeur_niveau = afficher_menu("NIVEAU DE DIFFICULTÉ", 3)
-print(valeur_niveau)
+def main():
+    valeur_mode = afficher_menu("MODE DE JEU", 2)
+    print(valeur_mode)
+    valeur_niveau = afficher_menu("NIVEAU DE DIFFICULTÉ", 3)
+    print(valeur_niveau)
 ######################################################
 
 ######################################################
 #Appel main()
+
 afficher_bienvenue()
 construire_listes(valeur_mode)
 print("fin")
