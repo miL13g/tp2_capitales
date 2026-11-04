@@ -45,6 +45,31 @@ def afficher_menu(titre, options):
     valeur = lire_entier("Votre choix : ",1, options)
     return valeur
 
+def afficher_bienvenue():
+    print(f"+{'-'*76}+")
+    print(f"|{"Jeu questionnaire - Les Capitales":^76}|")
+    print(f"|{"réalisé par Francis et Émile":^76}|")
+    print(f"+{'-'*76}+")
+
+
+def construire_listes(mode):
+    liste_pays= []
+    liste_capitales_pays = []
+    liste_provinces = []
+    liste_capitales_provinces = []
+    liste_etats = []
+    liste_capitales_etats = []
+    if mode == 1:
+        liste_pays.append(PAYS)
+        liste_capitales_pays.append(CAPITALES_PAYS)
+    elif mode == 2:
+         liste_pays.append(PAYS)
+         liste_capitales_pays.append(CAPITALES_PAYS)
+         liste_provinces.append(PROVINCES)
+         liste_capitales_provinces.append(CAPITALES_PROVINCES)
+         liste_etats.append(ETATS)
+         liste_capitales_etats.append(CAPITALES_ETATS)
+
 
 
 
@@ -68,5 +93,7 @@ print(valeur_niveau)
 
 ######################################################
 #Appel main()
-
+afficher_bienvenue()
+construire_listes(valeur_mode)
+print("fin")
 ######################################################
