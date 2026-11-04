@@ -53,6 +53,9 @@ def construire_listes(mode):
          liste_capitales_etats.append(CAPITALES_ETATS)
 
 
+def calculer_pourcentage(nb_bonnes, nb_questions):
+    pourcentage = nb
+
 
 
 
