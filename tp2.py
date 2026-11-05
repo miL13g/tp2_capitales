@@ -126,3 +126,12 @@ afficher_bienvenue()
 main()
 print("fin")
 ######################################################
+
+
+########## POUR CE SOIR ##########
+# - fonction jouer_partie (meat'n potatoes)
+#  - comprendre la méthode et la bonnne utilisation de random
+#   - la fonction random devra être utilisé pour aller piger 
+#     dans la/les liste(s) de lieux dans une boucle "for i in range"
+# - après ça on vera pcq clairement on peut prendre la nuite la d'ssus
+##################################
