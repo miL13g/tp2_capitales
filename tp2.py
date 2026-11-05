@@ -9,9 +9,11 @@ Date      : 03 novembre 2026
 
 import random
 random.seed(10)
-from colorama import Fore, Style
+from colorama import Fore, Style, init
 from utilitaires import lire_entier, lire_reel, lire_texte, lire_oui_non
 from donnees_tp2 import PAYS, CAPITALES_PAYS, PROVINCES, CAPITALES_PROVINCES, ETATS, CAPITALES_ETATS
+
+init()
 
 ######################################################
 
@@ -85,13 +87,13 @@ def calculer_pourcentage(nb_bonnes, nb_questions):
     pourcentage = (nb_bonnes * 100) // nb_questions
 
 
-def jouer_partie(lieux, capitales, nb_questions, nom):
-    for i in range (len(nb_questions)):
-        print(f"Question {i + 1} de {nb_questions} - {lieu}")
-        valide = False
-        while not valide:
-            try:
-                capitale = input(f"Capitale : ")
+# def jouer_partie(lieux, capitales, nb_questions, nom):
+#     for i in range (len(nb_questions)):
+#         print(f"Question {i + 1} de {nb_questions} - {lieu}")
+#         valide = False
+#         while not valide:
+#             try:
+#                 capitale = input(f"Capitale : ")
                 
         
 
@@ -112,6 +114,7 @@ def jouer_partie(lieux, capitales, nb_questions, nom):
 def main():
     valeur_mode = afficher_menu("MODE DE JEU", 2)
     print(valeur_mode)
+    construire_listes(valeur_mode)
     valeur_niveau = afficher_menu("NIVEAU DE DIFFICULTÉ", 3)
     print(valeur_niveau)
 ######################################################
@@ -120,6 +123,6 @@ def main():
 #Appel main()
 
 afficher_bienvenue()
-construire_listes(valeur_mode)
+main()
 print("fin")
 ######################################################
