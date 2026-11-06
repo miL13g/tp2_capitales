@@ -112,6 +112,7 @@ def calculer_pourcentage(nb_bonnes, nb_questions):
 ######################################################
 #Fonction Main()
 def main():
+    afficher_bienvenue()
     valeur_mode = afficher_menu("MODE DE JEU", 2)
     print(valeur_mode)
     construire_listes(valeur_mode)
@@ -122,7 +123,7 @@ def main():
 ######################################################
 #Appel main()
 
-afficher_bienvenue()
+
 main()
 print("fin")
 ######################################################

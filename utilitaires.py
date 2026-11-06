@@ -20,6 +20,12 @@ Date      : 03 novembre 2026
 #import
 from colorama import Fore, Style
 ##############################
+##############################
+#Constantes
+LETTRES_AVEC_ACCENT = "àâäéèêëîïôöùûüÿç-"
+LETTRE_SANS_ACCENT =  "aaaeeeeiioouuuyc "
+##############################
+
 
 def lire_entier(message, minimum=0, maximum=99):
     """Demande un nombre entier jusqu'à ce que la saisie soit valide.
@@ -99,8 +105,18 @@ def lire_texte(message):
     return nom
 
 
-# def normaliser(texte):
+def normaliser(texte):
+    for i in texte:
+        if i in LETTRES_AVEC_ACCENT:
+            normalise = LETTRES_AVEC_ACCENT.find(i)
+            correction = texte.find(i)
+            texte = texte.replace(texte[correction], LETTRE_SANS_ACCENT[normalise])
+            print(texte)
+        else:
+            print(texte)
 
+normaliser(capital)
+normaliser("brézîl")
 # Tests rapides : exécutés seulement si on lance ce fichier directement,
 # jamais lorsqu'il est importé par un autre fichier.
 if __name__ == "__main__":
