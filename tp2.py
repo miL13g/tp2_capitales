@@ -19,19 +19,19 @@ init()
 
 ######################################################
 #Constantes
-
+liste_standard= []   #est-ce correcte de mettre les listes dans les constantes?
+liste_standard_capitales = []
+liste_aventure = []
+liste_aventure_reponse = []
 ######################################################
 
 ######################################################
 #Variables
-liste_standard= []
-liste_standard_reponse = []
-liste_aventure = []
-liste_aventure_reponse = []
+
 ######################################################
 ######################################################
 #Fonctions
-def demander_nom():
+def demander_nom():# à documenter
     nom = input(f"Quel est ton nom jeune bambin? : ")
     return nom
 
@@ -58,14 +58,14 @@ def afficher_menu(titre, options):
     valeur = lire_entier("Votre choix : ",1, options)
     return valeur
 
-def afficher_bienvenue():
+def afficher_bienvenue():# à documenter
     print(f"+{'-'*76}+")
     print(f"|{"Jeu questionnaire - Les Capitales":^76}|")
     print(f"|{"réalisé par Francis et Émile":^76}|")
     print(f"+{'-'*76}+")
 
 
-def construire_listes(mode):
+def construire_listes(mode):# à documenter
     if mode == 1:
         return PAYS, CAPITALES_PAYS
     elif mode == 2:
@@ -82,16 +82,50 @@ liste_aventure = liste_retour[0]
 liste_aventure_reponse = liste_retour[1]
 
 
-def est_bonne_reponse(reponse, capitale):
-    print("yo")
+def est_bonne_reponse(reponse, capitale):# à vérifier si le in est un tableau qui vérifie un tableau ou peut être un str qui vérifie dnas un tableau
+    """Vérifie sur la réponse est bonne ou mauvaise
+
+    Args:
+        reponse (str): réponse inscrite par le joueur
+        capitale (str): La réponse à valider
+
+    Returns:
+        bool: Si la réponse est bonne ou mauvaise.
+    """
+    return reponse in capitale
 
 
 
-def calculer_pourcentage(nb_bonnes, nb_questions):
+
+
+def calculer_pourcentage(nb_bonnes, nb_questions):# à documenter et ajouter return
     pourcentage = (nb_bonnes * 100) // nb_questions
 
+def obtenir_appretiation(pourcentage):
+    """Donne l'appréciation en fonction du pourcentage obtenu.
 
-def jouer_partie(lieux, capitales, nb_questions, nom):
+    Args:
+        pourcentage (int): Pourcentage obtenu par l'utilisateur
+
+    Returns:
+        str: L'appréciation
+    """
+    match pourcentage:
+        case 100:
+            return "Parfait! Un vrai globe-trotter!"
+        case _ if pourcentage >= 80:
+            return "Excellent!"
+        case _ if pourcentage >= 60:
+            return "Bon Travail!"
+        case _ if pourcentage >= 40:
+            return "Pas mal, mais l'atlas pourrait vous aider."
+        case _ if pourcentage < 40:
+            return "Il est temps de sortir l'atlas!"
+        case _ :
+            return "Pourcentage invalide."
+
+
+def jouer_partie(lieux, capitales, nb_questions, nom):# à documenter
     for i in range (nb_questions):
         pays_demande = random.randrange(1,len(lieux))
         print(f"Question {i + 1} de {nb_questions} - {pays_demande}")
@@ -137,7 +171,6 @@ def main():
 
 
 main()
-print("fin")
 ######################################################
 
 

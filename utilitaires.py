@@ -106,20 +106,30 @@ def lire_texte(message):
 
 
 def normaliser(texte):
+    """Prend un texte pour y enlerver les espaces autours, mettre en minuscule, 
+    remplacer les lettres accentués par la lettre sans accent et les traits d'union par des espaces.
+
+    Args:
+        texte (str): Le texte à normaliser
+
+    Returns:
+        str : Le texte normalisé
+    """
     for i in texte:
         if i in LETTRES_AVEC_ACCENT:
             normalise = LETTRES_AVEC_ACCENT.find(i)
             correction = texte.find(i)
             texte = texte.replace(texte[correction], LETTRE_SANS_ACCENT[normalise])
-            print(texte)
-        else:
-            print(texte)
+        
 
-normaliser(capital)
-normaliser("brézîl")
+           
+    return texte.lower().strip()
+
+
 # Tests rapides : exécutés seulement si on lance ce fichier directement,
 # jamais lorsqu'il est importé par un autre fichier.
 if __name__ == "__main__":
+    normaliser("BrézîL")
     age = lire_entier("Âge (0 à 120) : ", 0, 120)
     print("Entier lu :", age)
     montant = lire_reel("Montant : ")
