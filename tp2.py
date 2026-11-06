@@ -31,6 +31,10 @@ liste_aventure_reponse = []
 ######################################################
 ######################################################
 #Fonctions
+def demander_nom():
+    nom = input(f"Quel est ton nom jeune bambin? : ")
+    return nom
+
 def afficher_menu(titre, options):
     """Affiche le menu selon l'option. 
 
@@ -87,15 +91,20 @@ def calculer_pourcentage(nb_bonnes, nb_questions):
     pourcentage = (nb_bonnes * 100) // nb_questions
 
 
-# def jouer_partie(lieux, capitales, nb_questions, nom):
-#     for i in range (len(nb_questions)):
-#         print(f"Question {i + 1} de {nb_questions} - {lieu}")
-#         valide = False
-#         while not valide:
-#             try:
-#                 capitale = input(f"Capitale : ")
+def jouer_partie(lieux, capitales, nb_questions, nom):
+    for i in range (nb_questions):
+        pays_demande = random.randrange(1,len(lieux))
+        print(f"Question {i + 1} de {nb_questions} - {pays_demande}")
+        valide = False
+        while not valide:
+            try:
+                pays_demande = random.randrange(1,len(lieux))
+                print(pays_demande)
+                capitale = input(f"Capitale : ")
+            except:
+                print("yooo")
                 
-        
+ 
 
 
 
@@ -113,11 +122,14 @@ def calculer_pourcentage(nb_bonnes, nb_questions):
 #Fonction Main()
 def main():
     afficher_bienvenue()
+    nom = demander_nom()
+    print(f"Salut {nom}")
     valeur_mode = afficher_menu("MODE DE JEU", 2)
     print(valeur_mode)
     construire_listes(valeur_mode)
     valeur_niveau = afficher_menu("NIVEAU DE DIFFICULTÉ", 3)
     print(valeur_niveau)
+    jouer_partie(PAYS, CAPITALES_PAYS, valeur_niveau, nom)   
 ######################################################
 
 ######################################################
