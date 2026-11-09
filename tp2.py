@@ -45,21 +45,27 @@ def demander_nom():# à documenter
     return nom
 
 def construire_option(liste):
+    """construit la liste d'options selon l'option choisie
+
+    Args:
+        liste (list): La liste d'options désiré
+
+    Returns:
+        list: Une liste de texte à l'index +1 des modes 
+    """
     option_courante=[]
     for i in range(len(liste)):
         liste_courante = f"{i+1} - {liste[i]}"
         option_courante.append(liste_courante)
     return option_courante
 
-liste_options_modes = construire_option(liste_modes)
-print(liste_options_modes)
 
 def afficher_menu(titre, options):
     """Affiche le menu selon l'option. 
 
     Args:
         titre (str): Le message affiché à l'utilisateur.
-        options (int): Choix de menu (2 ou 3)
+        options (list): la liste de l'option désiré.
 
     Returns:
         int: Le nombre saisi.
@@ -76,7 +82,6 @@ def afficher_menu(titre, options):
     valeur = lire_entier("Votre choix : ",1, len(options))
     return valeur
 
-afficher_menu("MODE",liste_options_modes)
 
 def afficher_bienvenue():# à documenter
     print(f"+{'-'*76}+")
@@ -112,7 +117,11 @@ def est_bonne_reponse(reponse, capitale):# à vérifier si le in est un tableau 
     Returns:
         bool: Si la réponse est bonne ou mauvaise.
     """
-    return reponse in capitale
+    tableau_capitales = capitale.split("/")
+    for i in range(len(tableau_capitales)):
+        if(tableau_capitales[i] == reponse):
+            return True
+    return False
 
 
 def calculer_pourcentage(nb_bonnes, nb_questions):# à documenter et ajouter return
@@ -215,10 +224,12 @@ def main():
         if rejouer == "n":
             valide = True
         else:
-            valeur_mode = afficher_menu("MODE DE JEU", 2)
+            liste_options_modes = construire_option(liste_modes)
+            valeur_mode = afficher_menu("MODE DE JEU",liste_options_modes)
             print(valeur_mode)
             construire_listes(valeur_mode)
-            valeur_niveau = afficher_menu("NIVEAU DE DIFFICULTÉ", 3)
+            liste_options_niveaux = construire_option(liste_niveaux)
+            valeur_niveau = afficher_menu("NIVEAU DE DIFFICULTÉ",liste_options_niveaux)
             print(valeur_niveau)
             jouer_partie(PAYS, CAPITALES_PAYS, valeur_niveau, nom)
             #rejouer = demander oui_non
