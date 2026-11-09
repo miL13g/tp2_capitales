@@ -185,10 +185,11 @@ def jouer_partie(lieux, capitales, nb_questions, nom):# à documenter
                     capitales_rates.append(capitale)
                     reponses_rates.append(reponse)
                     valide = True
-
-
             except:
                 print("yooo")
+
+    # Créer le bilan ici!!! #
+
 
     return lieux_rates, capitales_rates, reponses_rates
 
@@ -234,11 +235,9 @@ def main():
         else:
             liste_options_modes = construire_option(liste_modes)
             valeur_mode = afficher_menu("MODE DE JEU",liste_options_modes)
-            print(valeur_mode)
             construire_listes(valeur_mode)
             liste_options_niveaux = construire_option(liste_niveaux)
             valeur_niveau = afficher_menu("NIVEAU DE DIFFICULTÉ",liste_options_niveaux)
-            print(valeur_niveau)
             jouer_partie(PAYS, CAPITALES_PAYS, valeur_niveau, nom)
             #rejouer = demander oui_non
     #afficher_historique()
