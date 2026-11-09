@@ -23,6 +23,15 @@ liste_standard= []   #est-ce correcte de mettre les listes dans les constantes?
 liste_standard_capitales = []
 liste_aventure = []
 liste_aventure_reponse = []
+lieux_rates = []
+reponse_donnees = []
+capitales_rates = []
+liste_niveaux = ["Facile","Normal","Avancé"]
+liste_questions = [5,10,15]
+liste_modes = ["Standard","Aventure"]
+liste_options_modes = []
+liste_options_niveaux = []
+
 ######################################################
 
 ######################################################
@@ -35,6 +44,16 @@ def demander_nom():# à documenter
     nom = input(f"Quel est ton nom jeune bambin? : ")
     return nom
 
+def construire_option(liste):
+    option_courante=[]
+    for i in range(len(liste)):
+        liste_courante = f"{i+1} - {liste[i]}"
+        option_courante.append(liste_courante)
+    return option_courante
+
+liste_options_modes = construire_option(liste_modes)
+print(liste_options_modes)
+
 def afficher_menu(titre, options):
     """Affiche le menu selon l'option. 
 
@@ -46,17 +65,18 @@ def afficher_menu(titre, options):
         int: Le nombre saisi.
     """
     print(titre)
-    if options == 2:
-        print("1 - Standard (196 pays du monde)")
-        print("2 - Standard (259 lieux : pays + provinces et territoires du Canada + États américains)")
-    # for i in range(options):
-    #     print(f"{i+1} - ")
-    elif options == 3:
-        print("1 - Facile (5 questions)")
-        print("2 - Normal (10 questions)")
-        print("3 - Avancé (15 questions)")
-    valeur = lire_entier("Votre choix : ",1, options)
+    texte_mode = ["(196 pays du monde)","(259 lieux : pays + provinces et territoires du Canada + États américains)"]
+    texte_question = ["(5 questions)","(10 questions)","(15 questions)"]
+    if options == liste_options_modes:
+        for i in range(len(options)):
+            print(f"{options[i]} {texte_mode[i]}")
+    if options == liste_options_niveaux:
+        for i in range(len(options)):
+            print(f"{options[i]} {texte_question[i]}")
+    valeur = lire_entier("Votre choix : ",1, len(options))
     return valeur
+
+afficher_menu("MODE",liste_options_modes)
 
 def afficher_bienvenue():# à documenter
     print(f"+{'-'*76}+")
@@ -172,8 +192,6 @@ def afficher_revision(lieux_rates, reponses_donnees, capitales_rates):
     print("-"*78)
     if reponses_donnees == 0:
         print(Fore. GREEN + f"Aucune erreur : rien à réviser!" + Style.RESET_ALL)
-        liste_yo = []
-        return liste_yo
     else :
         for i in range(reponses_donnees):
             print(f"{lieux_rates[i]:<32}| {reponses_donnees[i]:<15}| {capitales_rates[i]:<25}")
