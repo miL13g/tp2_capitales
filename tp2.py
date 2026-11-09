@@ -97,6 +97,7 @@ def est_bonne_reponse(reponse, capitale):# à vérifier si le in est un tableau 
 
 def calculer_pourcentage(nb_bonnes, nb_questions):# à documenter et ajouter return
     pourcentage = (nb_bonnes * 100) // nb_questions
+    return pourcentage
 
 def obtenir_appretiation(pourcentage):
     """Donne l'appréciation en fonction du pourcentage obtenu.
@@ -123,15 +124,35 @@ def obtenir_appretiation(pourcentage):
 
 
 def jouer_partie(lieux, capitales, nb_questions, nom):# à documenter
+
+    if nb_questions == 1:
+        nb_questions = 5
+    elif nb_questions == 2:
+        nb_questions = 10
+    elif nb_questions == 3:
+        nb_questions = 15
+    else:
+        print("How bruva")
+
+
     for i in range (nb_questions):
+        nb_bonnes = 0
         pays_demande = random.randrange(1,len(lieux))
+        capitale = pays_demande[i]
         print(f"Question {i + 1} de {nb_questions} - {pays_demande}")
         valide = False
         while not valide:
             try:
                 pays_demande = random.randrange(1,len(lieux))
                 print(pays_demande)
-                capitale = input(f"Capitale : ")
+                reponse = lire_texte("Quel est la Capitale???????????? : ")
+                if est_bonne_reponse(reponse, pays_demande) == True:
+                    nb_bonnes += 1
+                    print(f"Bonne réponse! Pointage {nb_bonnes}/{nb_questions}")
+                else:
+
+                    print ("Mauvaise réponse! On cherchait : ")
+
             except:
                 print("yooo")
                 
