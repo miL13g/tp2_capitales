@@ -98,6 +98,7 @@ def lire_texte(message):
     Returns:
         string: Le texte saisi par l'utilisateur
     """
+
     nom = input(message).strip()
     while nom == "":
         print("Le nom ne peut pas être vide.")

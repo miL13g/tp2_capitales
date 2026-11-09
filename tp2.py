@@ -13,7 +13,7 @@ from colorama import Fore, Style, init
 from utilitaires import lire_entier, lire_reel, lire_texte, lire_oui_non
 from donnees_tp2 import PAYS, CAPITALES_PAYS, PROVINCES, CAPITALES_PROVINCES, ETATS, CAPITALES_ETATS
 
-init()
+init(autoreset=True)
 
 ######################################################
 
@@ -124,37 +124,45 @@ def obtenir_appretiation(pourcentage):
 
 
 def jouer_partie(lieux, capitales, nb_questions, nom):# à documenter
+    
+    NB_QUESTIONS = [5, 10, 15]
 
-    if nb_questions == 1:
-        nb_questions = 5
-    elif nb_questions == 2:
-        nb_questions = 10
-    elif nb_questions == 3:
-        nb_questions = 15
-    else:
-        print("How bruva")
+    nb_questions = NB_QUESTIONS[nb_questions - 1] 
 
+    liste_valeurs_aleatoires = random.sample(range(0, len(lieux)), nb_questions)
 
-    for i in range (nb_questions):
-        nb_bonnes = 0
-        pays_demande = random.randrange(1,len(lieux))
-        capitale = pays_demande[i]
-        print(f"Question {i + 1} de {nb_questions} - {pays_demande}")
+    lieux_rates = []
+    capitales_rates = []
+    reponses_rates = []
+
+    nb_bonnes = 0
+
+    for i in range (len(liste_valeurs_aleatoires)):
+        index_question = liste_valeurs_aleatoires[i]
+        print(f"Question {i + 1} de {nb_questions} - {lieux[index_question]}")
         valide = False
         while not valide:
             try:
-                pays_demande = random.randrange(1,len(lieux))
-                print(pays_demande)
-                reponse = lire_texte("Quel est la Capitale???????????? : ")
-                if est_bonne_reponse(reponse, pays_demande) == True:
+                question = lieux[index_question]
+                capitale = capitales[index_question]
+                reponse = lire_texte("Capitale : ")
+                if est_bonne_reponse(reponse, capitale) == True:
                     nb_bonnes += 1
-                    print(f"Bonne réponse! Pointage {nb_bonnes}/{nb_questions}")
+                    print(Fore.GREEN + f"Bonne réponse! Pointage {nb_bonnes}/{nb_questions}")
+                    valide = True
                 else:
+                    print (Fore.RED + f"Mauvaise réponse! On cherchait : {capitales[index_question]}. Pointage : {nb_bonnes} / {nb_questions}")
+                    lieux_rates.append(question)
+                    capitales_rates.append(capitale)
+                    reponses_rates.append(reponse)
+                    valide = True
 
-                    print ("Mauvaise réponse! On cherchait : ")
 
             except:
                 print("yooo")
+
+    return lieux_rates, capitales_rates, reponses_rates
+
                 
 
 def afficher_revision(lieux_rates, reponses_donnees, capitales_rates):
@@ -171,7 +179,7 @@ def afficher_revision(lieux_rates, reponses_donnees, capitales_rates):
             print(f"{lieux_rates[i]:<32}| {reponses_donnees[i]:<15}| {capitales_rates[i]:<25}")
     print("-"*78)        
     
-afficher_revision(0,0,0)
+
 
 
 
