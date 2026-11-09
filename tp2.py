@@ -95,9 +95,6 @@ def est_bonne_reponse(reponse, capitale):# à vérifier si le in est un tableau 
     return reponse in capitale
 
 
-
-
-
 def calculer_pourcentage(nb_bonnes, nb_questions):# à documenter et ajouter return
     pourcentage = (nb_bonnes * 100) // nb_questions
 
@@ -138,7 +135,22 @@ def jouer_partie(lieux, capitales, nb_questions, nom):# à documenter
             except:
                 print("yooo")
                 
- 
+
+def afficher_revision(lieux_rates, reponses_donnees, capitales_rates):
+    print(f"{"À RÉVISER":^78}")
+    print("-"*78)
+    print(f"{"Lieu":<32}| {"Votre réponse ":<15}| {"Bonne réponses":<25}")
+    print("-"*78)
+    if reponses_donnees == 0:
+        print(Fore. GREEN + f"Aucune erreur : rien à réviser!" + Style.RESET_ALL)
+        liste_yo = []
+        return liste_yo
+    else :
+        for i in range(reponses_donnees):
+            print(f"{lieux_rates[i]:<32}| {reponses_donnees[i]:<15}| {capitales_rates[i]:<25}")
+    print("-"*78)        
+    
+afficher_revision(0,0,0)
 
 
 
@@ -158,17 +170,24 @@ def main():
     afficher_bienvenue()
     nom = demander_nom()
     print(f"Salut {nom}")
-    valeur_mode = afficher_menu("MODE DE JEU", 2)
-    print(valeur_mode)
-    construire_listes(valeur_mode)
-    valeur_niveau = afficher_menu("NIVEAU DE DIFFICULTÉ", 3)
-    print(valeur_niveau)
-    jouer_partie(PAYS, CAPITALES_PAYS, valeur_niveau, nom)   
+    rejouer = "" #à réviser l'emplacement
+    valide = False
+    while not valide:
+        if rejouer == "n":
+            valide = True
+        else:
+            valeur_mode = afficher_menu("MODE DE JEU", 2)
+            print(valeur_mode)
+            construire_listes(valeur_mode)
+            valeur_niveau = afficher_menu("NIVEAU DE DIFFICULTÉ", 3)
+            print(valeur_niveau)
+            jouer_partie(PAYS, CAPITALES_PAYS, valeur_niveau, nom)
+            #rejouer = demander oui_non
+    #afficher_historique()
 ######################################################
 
 ######################################################
 #Appel main()
-
 
 main()
 ######################################################
