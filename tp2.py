@@ -60,7 +60,7 @@ def construire_option(liste):
     return option_courante
 
 
-def afficher_menu(titre, options):
+def afficher_menu(titre, options,texte):
     """Affiche le menu selon l'option. 
 
     Args:
@@ -71,16 +71,18 @@ def afficher_menu(titre, options):
         int: Le nombre saisi.
     """
     print(titre)
-    texte_mode = ["(196 pays du monde)","(259 lieux : pays + provinces et territoires du Canada + États américains)"]
-    texte_question = ["(5 questions)","(10 questions)","(15 questions)"]
-    if options == liste_options_modes:
-        for i in range(len(options)):
-            print(f"{options[i]} {texte_mode[i]}")
-    if options == liste_options_niveaux:
-        for i in range(len(options)):
-            print(f"{options[i]} {texte_question[i]}")
+    for i in range(len(options)):
+            print(f"{options[i]} {texte[i]}")
     valeur = lire_entier("Votre choix : ",1, len(options))
     return valeur
+
+def afficher_mode():
+    texte_mode = ["(196 pays du monde)","(259 lieux : pays + provinces et territoires du Canada + États américains)"]
+
+    afficher_menu("MODE DE JEU",liste_options_modes,texte_mode)
+
+def afficher_niveau():
+    texte_question = ["(5 questions)","(10 questions)","(15 questions)"]
 
 
 def afficher_bienvenue():# à documenter
@@ -196,11 +198,18 @@ def jouer_partie(lieux, capitales, nb_questions, nom):# à documenter
                 
 
 def afficher_revision(lieux_rates, reponses_donnees, capitales_rates):
+    """Affiche un tableau de révision selon les fautes commises
+
+    Args:
+        lieux_rates (list): Liste du nom des lieux ratés
+        reponses_donnees (list): liste des mauviases réponses données par l'utilisateur
+        capitales_rates (list): liste des capitales des lieux ratés
+    """
     print(f"{"À RÉVISER":^78}")
     print("-"*78)
     print(f"{"Lieu":<32}| {"Votre réponse ":<15}| {"Bonne réponses":<25}")
     print("-"*78)
-    if reponses_donnees == 0:
+    if reponses_donnees == []:
         print(Fore. GREEN + f"Aucune erreur : rien à réviser!" + Style.RESET_ALL)
     else :
         for i in range(reponses_donnees):
@@ -208,17 +217,6 @@ def afficher_revision(lieux_rates, reponses_donnees, capitales_rates):
     print("-"*78)        
     
 
-
-
-
-# liste_noms = ["Brouillette", "Adam" "Frenette", "Alie"]
-# liste_prenoms ["David", "Benoit", "Nicole", "Robert"]
-
-#valeur_index = random.randrange(1,len(liste_noms))
-
-#print(liste_noms, liste_prenoms)
-#print(f"Mon index random est: {valeur_index}")
-#print(f"Le nom est {liste_noms[valeur_index]} et le prénom est {liste_prenoms[valeur_index]}")
 ######################################################
 
 ######################################################
