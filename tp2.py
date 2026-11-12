@@ -236,7 +236,11 @@ def main():
             construire_listes(valeur_mode)
             liste_options_niveaux = construire_option(liste_niveaux)
             valeur_niveau = afficher_menu("NIVEAU DE DIFFICULTÉ",liste_options_niveaux)
-            jouer_partie(PAYS, CAPITALES_PAYS, valeur_niveau, nom)
+            score = jouer_partie(PAYS, CAPITALES_PAYS, valeur_niveau, nom)
+            lieux_rates = score[0]
+            reponse_donnees = score[1]
+            capitales_rates = score[2]
+            afficher_revision(lieux_rates, reponse_donnees, capitales_rates)
             #rejouer = demander oui_non
     #afficher_historique()
 ######################################################
