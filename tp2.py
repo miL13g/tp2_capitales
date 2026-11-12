@@ -27,7 +27,7 @@ lieux_rates = []
 reponse_donnees = []
 capitales_rates = []
 liste_niveaux = ["Facile","Normal","Avancé"]
-liste_questions = [5,10,15]
+liste_questions = [5,10,15] # pas utilisé?
 liste_modes = ["Standard","Aventure"]
 
 ######################################################
@@ -60,12 +60,22 @@ def afficher_menu(titre, options,texte):
     return valeur
 
 def afficher_mode():
+    """Demande le mode désiré par le joueur
+
+    Returns:
+        int: Le choix du mode du joueur
+    """
     texte_mode = ["(196 pays du monde)","(259 lieux : pays + provinces et territoires du Canada + États américains)"]
     choix = afficher_menu("MODE DE JEU",liste_modes,texte_mode)
     return choix
 
 
 def afficher_niveau():
+    """Demande le niveau désiré par le joueur 
+
+    Returns:
+        int: Le choix du niveau du joueur
+    """
     texte_question = ["(5 questions)","(10 questions)","(15 questions)"]
     choix = afficher_menu("NIVEAU DE DIFFICULTÉ",liste_niveaux,texte_question)
     return choix
@@ -139,7 +149,17 @@ def obtenir_appretiation(pourcentage):
         case _ :
             return "Pourcentage invalide."
 
-def afficher_bilan(message):
+def afficher_bilan(message,pourcentage):
+    """Affiche le bilan du pointage de la partie ainsi que l'appréciation selon le pourcentage.
+
+    Args:
+        message (str): Message à afficher en fin de partie
+        pourcentage (int): Le pourcentage de bonne réponse de la partie
+    """
+    print("*"*78)
+    print(message)
+    print(obtenir_appretiation(pourcentage))
+    print("*"*78)
 
 
 
@@ -184,7 +204,7 @@ def jouer_partie(lieux, capitales, nb_questions, nom):# à documenter
     # Créer le bilan ici!!! #
 
 
-    return lieux_rates, capitales_rates, reponses_rates, nb_bonnes
+    return lieux_rates, capitales_rates, reponses_rates, nb_bonnes, nb_questions
 
                 
 
@@ -227,9 +247,12 @@ def main():
             valeur_niveau = afficher_niveau()
             score = jouer_partie(PAYS, CAPITALES_PAYS, valeur_niveau, nom)
             lieux_rates = score[0]
-            reponse_donnees = score[2]
             capitales_rates = score[1]
+            reponse_donnees = score[2]
             reponse_bonnes = score[3]
+            nombre_questions = score[4]
+            pourcentage = calculer_pourcentage(reponse_bonnes,nombre_questions)
+            afficher_bilan(f"{nom}, votre pointage est de {reponse_bonnes} sur {nombre_questions} ({pourcentage} %).",pourcentage)
             afficher_revision(lieux_rates, reponse_donnees, capitales_rates)
             rejouer = lire_oui_non("Voulez-vous rejouer? (o/n) : ")
     #afficher_historique()

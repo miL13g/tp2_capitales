@@ -116,6 +116,7 @@ def normaliser(texte):
     Returns:
         str : Le texte normalisé
     """
+    texte = texte.lower()
     for i in texte:
         if i in LETTRES_AVEC_ACCENT:
             normalise = LETTRES_AVEC_ACCENT.find(i)
@@ -130,7 +131,7 @@ def normaliser(texte):
 # Tests rapides : exécutés seulement si on lance ce fichier directement,
 # jamais lorsqu'il est importé par un autre fichier.
 if __name__ == "__main__":
-    normaliser("BrézîL")
+    normaliser("BrÉzîL")
     age = lire_entier("Âge (0 à 120) : ", 0, 120)
     print("Entier lu :", age)
     montant = lire_reel("Montant : ")
