@@ -10,7 +10,7 @@ Date      : 03 novembre 2026
 import random
 random.seed(10)
 from colorama import Fore, Style, init
-from utilitaires import lire_entier, lire_reel, lire_texte, lire_oui_non
+from utilitaires import lire_entier, lire_reel, lire_texte, lire_oui_non, normaliser
 from donnees_tp2 import PAYS, CAPITALES_PAYS, PROVINCES, CAPITALES_PROVINCES, ETATS, CAPITALES_ETATS
 
 init(autoreset=True)
@@ -19,7 +19,7 @@ init(autoreset=True)
 
 ######################################################
 #Constantes
-liste_standard= []   #est-ce correcte de mettre les listes dans les constantes?
+liste_standard= []   
 liste_standard_capitales = []
 liste_aventure = []
 liste_aventure_reponse = []
@@ -139,6 +139,9 @@ def obtenir_appretiation(pourcentage):
         case _ :
             return "Pourcentage invalide."
 
+def afficher_bilan(message):
+
+
 
 def jouer_partie(lieux, capitales, nb_questions, nom):# à documenter
     
@@ -162,7 +165,9 @@ def jouer_partie(lieux, capitales, nb_questions, nom):# à documenter
             try:
                 question = lieux[index_question]
                 capitale = capitales[index_question]
+                capitale = normaliser(capitale)
                 reponse = lire_texte("Capitale : ")
+                reponse = normaliser(reponse)
                 if est_bonne_reponse(reponse, capitale) == True:
                     nb_bonnes += 1
                     print(Fore.GREEN + f"Bonne réponse! Pointage {nb_bonnes}/{nb_questions}")
@@ -179,7 +184,7 @@ def jouer_partie(lieux, capitales, nb_questions, nom):# à documenter
     # Créer le bilan ici!!! #
 
 
-    return lieux_rates, capitales_rates, reponses_rates
+    return lieux_rates, capitales_rates, reponses_rates, nb_bonnes
 
                 
 
@@ -224,6 +229,7 @@ def main():
             lieux_rates = score[0]
             reponse_donnees = score[2]
             capitales_rates = score[1]
+            reponse_bonnes = score[3]
             afficher_revision(lieux_rates, reponse_donnees, capitales_rates)
             rejouer = lire_oui_non("Voulez-vous rejouer? (o/n) : ")
     #afficher_historique()
