@@ -29,8 +29,6 @@ capitales_rates = []
 liste_niveaux = ["Facile","Normal","Avancé"]
 liste_questions = [5,10,15]
 liste_modes = ["Standard","Aventure"]
-liste_options_modes = []
-liste_options_niveaux = []
 
 ######################################################
 
@@ -43,21 +41,6 @@ liste_options_niveaux = []
 def demander_nom():# à documenter
     nom = input(f"Quel est ton nom jeune bambin? : ")
     return nom
-
-def construire_option(liste):
-    """construit la liste d'options selon l'option choisie
-
-    Args:
-        liste (list): La liste d'options désiré
-
-    Returns:
-        list: Une liste de texte à l'index +1 des modes 
-    """
-    option_courante=[]
-    for i in range(len(liste)):
-        liste_courante = f"{i+1} - {liste[i]}"
-        option_courante.append(liste_courante)
-    return option_courante
 
 
 def afficher_menu(titre, options,texte):
@@ -72,17 +55,20 @@ def afficher_menu(titre, options,texte):
     """
     print(titre)
     for i in range(len(options)):
-            print(f"{options[i]} {texte[i]}")
+            print(f"{i+1} - {options[i]} {texte[i]}")
     valeur = lire_entier("Votre choix : ",1, len(options))
     return valeur
 
 def afficher_mode():
     texte_mode = ["(196 pays du monde)","(259 lieux : pays + provinces et territoires du Canada + États américains)"]
+    choix = afficher_menu("MODE DE JEU",liste_modes,texte_mode)
+    return choix
 
-    afficher_menu("MODE DE JEU",liste_options_modes,texte_mode)
 
 def afficher_niveau():
     texte_question = ["(5 questions)","(10 questions)","(15 questions)"]
+    choix = afficher_menu("NIVEAU DE DIFFICULTÉ",liste_niveaux,texte_question)
+    return choix
 
 
 def afficher_bienvenue():# à documenter
@@ -212,8 +198,8 @@ def afficher_revision(lieux_rates, reponses_donnees, capitales_rates):
     if reponses_donnees == []:
         print(Fore. GREEN + f"Aucune erreur : rien à réviser!" + Style.RESET_ALL)
     else :
-        for i in range(reponses_donnees):
-            print(f"{lieux_rates[i]:<32}| {reponses_donnees[i]:<15}| {capitales_rates[i]:<25}")
+        for i in range(len(reponses_donnees)):
+            print(f"{lieux_rates[i]:<32}| {reponses_donnees[i]:<15.15}| {capitales_rates[i]:<25}")
     print("-"*78)        
     
 
@@ -225,23 +211,21 @@ def main():
     afficher_bienvenue()
     nom = demander_nom()
     print(f"Salut {nom}")
-    rejouer = "" #à réviser l'emplacement
+    rejouer = True #à réviser l'emplacement
     valide = False
     while not valide:
-        if rejouer == "n":
+        if not rejouer:
             valide = True
         else:
-            liste_options_modes = construire_option(liste_modes)
-            valeur_mode = afficher_menu("MODE DE JEU",liste_options_modes)
+            valeur_mode = afficher_mode()
             construire_listes(valeur_mode)
-            liste_options_niveaux = construire_option(liste_niveaux)
-            valeur_niveau = afficher_menu("NIVEAU DE DIFFICULTÉ",liste_options_niveaux)
+            valeur_niveau = afficher_niveau()
             score = jouer_partie(PAYS, CAPITALES_PAYS, valeur_niveau, nom)
             lieux_rates = score[0]
-            reponse_donnees = score[1]
-            capitales_rates = score[2]
+            reponse_donnees = score[2]
+            capitales_rates = score[1]
             afficher_revision(lieux_rates, reponse_donnees, capitales_rates)
-            #rejouer = demander oui_non
+            rejouer = lire_oui_non("Voulez-vous rejouer? (o/n) : ")
     #afficher_historique()
 ######################################################
 
