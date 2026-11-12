@@ -10,7 +10,7 @@ Date      : 03 novembre 2026
 import random
 random.seed(10)
 from colorama import Fore, Style, init
-from utilitaires import lire_entier, lire_reel, lire_texte, lire_oui_non
+from utilitaires import lire_entier, lire_reel, lire_texte, lire_oui_non, normaliser
 from donnees_tp2 import PAYS, CAPITALES_PAYS, PROVINCES, CAPITALES_PROVINCES, ETATS, CAPITALES_ETATS
 
 init(autoreset=True)
@@ -19,7 +19,7 @@ init(autoreset=True)
 
 ######################################################
 #Constantes
-liste_standard= []   #est-ce correcte de mettre les listes dans les constantes?
+liste_standard= []   
 liste_standard_capitales = []
 liste_aventure = []
 liste_aventure_reponse = []
@@ -29,8 +29,8 @@ capitales_rates = []
 liste_niveaux = ["Facile","Normal","Avancé"]
 liste_questions = [5,10,15]
 liste_modes = ["Standard","Aventure"]
-liste_options_modes = []
-liste_options_niveaux = []
+# liste_options_modes = []
+# liste_options_niveaux = []
 
 ######################################################
 
@@ -153,6 +153,9 @@ def obtenir_appretiation(pourcentage):
         case _ :
             return "Pourcentage invalide."
 
+def afficher_bilan(message):
+
+
 
 def jouer_partie(lieux, capitales, nb_questions, nom):# à documenter
     
@@ -176,7 +179,9 @@ def jouer_partie(lieux, capitales, nb_questions, nom):# à documenter
             try:
                 question = lieux[index_question]
                 capitale = capitales[index_question]
+                capitale = normaliser(capitale)
                 reponse = lire_texte("Capitale : ")
+                reponse = normaliser(reponse)
                 if est_bonne_reponse(reponse, capitale) == True:
                     nb_bonnes += 1
                     print(Fore.GREEN + f"Bonne réponse! Pointage {nb_bonnes}/{nb_questions}")
@@ -193,7 +198,7 @@ def jouer_partie(lieux, capitales, nb_questions, nom):# à documenter
     # Créer le bilan ici!!! #
 
 
-    return lieux_rates, capitales_rates, reponses_rates
+    return lieux_rates, capitales_rates, reponses_rates, nb_bonnes
 
                 
 
@@ -214,7 +219,9 @@ def afficher_revision(lieux_rates, reponses_donnees, capitales_rates):
     else :
         for i in range(reponses_donnees):
             print(f"{lieux_rates[i]:<32}| {reponses_donnees[i]:<15}| {capitales_rates[i]:<25}")
-    print("-"*78)        
+    print("-"*78)   
+
+# AFFICHER HISTORIQUE #  
     
 
 ######################################################
@@ -232,14 +239,15 @@ def main():
             valide = True
         else:
             liste_options_modes = construire_option(liste_modes)
-            valeur_mode = afficher_menu("MODE DE JEU",liste_options_modes)
+            valeur_mode = afficher_mode()
             construire_listes(valeur_mode)
             liste_options_niveaux = construire_option(liste_niveaux)
-            valeur_niveau = afficher_menu("NIVEAU DE DIFFICULTÉ",liste_options_niveaux)
+            valeur_niveau = afficher_niveau()
             score = jouer_partie(PAYS, CAPITALES_PAYS, valeur_niveau, nom)
             lieux_rates = score[0]
             reponse_donnees = score[1]
             capitales_rates = score[2]
+            reponse_bonnes = score[3]
             afficher_revision(lieux_rates, reponse_donnees, capitales_rates)
             #rejouer = demander oui_non
     #afficher_historique()
