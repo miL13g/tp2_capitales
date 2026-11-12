@@ -27,7 +27,7 @@ lieux_rates = []
 reponse_donnees = []
 capitales_rates = []
 liste_niveaux = ["Facile","Normal","Avancé"]
-liste_questions = [5,10,15] # pas utilisé?
+#liste_questions = [5,10,15] # pas utilisé?
 liste_modes = ["Standard","Aventure"]
 
 ######################################################
@@ -243,9 +243,11 @@ def main():
             valide = True
         else:
             valeur_mode = afficher_mode()
-            construire_listes(valeur_mode)
+            liste_questions = construire_listes(valeur_mode)
+            liste_lieux = liste_questions[0]
+            liste_capitales = liste_questions[1]
             valeur_niveau = afficher_niveau()
-            score = jouer_partie(PAYS, CAPITALES_PAYS, valeur_niveau, nom)
+            score = jouer_partie(liste_lieux, liste_capitales, valeur_niveau, nom)
             lieux_rates = score[0]
             capitales_rates = score[1]
             reponse_donnees = score[2]
