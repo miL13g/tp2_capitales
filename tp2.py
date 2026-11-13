@@ -105,7 +105,7 @@ liste_aventure = liste_retour[0]
 liste_aventure_reponse = liste_retour[1]
 
 
-def est_bonne_reponse(reponse, capitale):# à vérifier si le in est un tableau qui vérifie un tableau ou peut être un str qui vérifie dnas un tableau
+def est_bonne_reponse(reponse, capitale):# à vérifier si le in est un tableau qui vérifie un tableau ou peut être un str qui vérifie dans un tableau
     """Vérifie sur la réponse est bonne ou mauvaise
 
     Args:
@@ -122,7 +122,7 @@ def est_bonne_reponse(reponse, capitale):# à vérifier si le in est un tableau 
     return False
 
 
-def calculer_pourcentage(nb_bonnes, nb_questions):# à documenter et ajouter return
+def calculer_pourcentage(nb_bonnes, nb_questions): #utilise la variable du pointage de questions réussies en relation avec le nombre de questions totales
     pourcentage = (nb_bonnes * 100) // nb_questions
     return pourcentage
 
@@ -227,6 +227,8 @@ def afficher_revision(lieux_rates, reponses_donnees, capitales_rates):
             print(f"{lieux_rates[i]:<32}| {reponses_donnees[i]:<15.15}| {capitales_rates[i]:<25}")
     print("-"*78)        
     
+    # HISTORIQUE ICI #
+
 
 ######################################################
 
