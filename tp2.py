@@ -190,10 +190,10 @@ def jouer_partie(lieux, capitales, nb_questions, nom):# à documenter
                 reponse = normaliser(reponse)
                 if est_bonne_reponse(reponse, capitale) == True:
                     nb_bonnes += 1
-                    print(Fore.GREEN + f"Bonne réponse! Pointage {nb_bonnes}/{nb_questions}")
+                    print(Fore.GREEN + f"Bonne réponse! Pointage {nb_bonnes}/{i+1}")
                     valide = True
                 else:
-                    print (Fore.RED + f"Mauvaise réponse! On cherchait : {capitales[index_question]}. Pointage : {nb_bonnes} / {nb_questions}")
+                    print (Fore.RED + f"Mauvaise réponse! On cherchait : {capitales[index_question]}. Pointage : {nb_bonnes} / {i+1}")
                     lieux_rates.append(question)
                     capitales_rates.append(capitale)
                     reponses_rates.append(reponse)
