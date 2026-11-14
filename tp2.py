@@ -237,7 +237,7 @@ def afficher_historique(nom, modes_joues, niveaux_joues, resultats, totaux, pour
     print(f"-"*78)
     for i in range(len(nb_parties)):
         resultat_texte = f"{resultats[i]:>3} / {totaux[i]:<2}"
-        print(f"{i+1:>6} | {modes_joues[i]:^8} |{niveaux_joues[i]:^8}|{resultat_texte:^10}| {pourcentages[i]:>7} %")
+        print(f"{i+1:>6} | {modes_joues[i]:^8} |{niveaux_joues[i]:^8}|{resultat_texte:^10}| {pourcentages[i]:>6} %")
         if pourcentages[i] == max(pourcentages):
             max_partie = nb_parties[i]
     print(f"="*78)
