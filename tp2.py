@@ -227,7 +227,25 @@ def afficher_revision(lieux_rates, reponses_donnees, capitales_rates):
             print(f"{lieux_rates[i]:<32}| {reponses_donnees[i]:<15.15}| {capitales_rates[i]:<25}")
     print("-"*78)        
     
-    # HISTORIQUE ICI #
+
+
+def afficher_historique(nom, modes_joues, niveaux_joues, resultats, totaux, pourcentages, nb_parties):
+    print(f"="*78)
+    print(f"{"HISTORIQUE DE LA SESSION":^78}")
+    print(f"="*78)
+    print(f"{"Partie":<7}| {"Mode":<9}|{"Niveau":^8}|{"Resultat":^10}| {"Réussite":<30}")
+    print(f"-"*78)
+    for i in range(len(nb_parties)):
+        resultat_texte = f"{resultats[i]:>3} / {totaux[i]:<2}"
+        print(f"{i+1:>6} | {modes_joues[i]:^8} |{niveaux_joues[i]:^8}|{resultat_texte:^10}| {pourcentages[i]:>7} %")
+        if pourcentages[i] == max(pourcentages):
+            max_partie = nb_parties[i]
+    print(f"="*78)
+    print(f" Meilleure partie : partie {max_partie} ({max(pourcentages)} %)")
+    print(f" Merci d'avoir joué, {nom}!")
+            
+
+         
 
 
 ######################################################
@@ -239,26 +257,42 @@ def main():
     nom = demander_nom()
     print(f"Salut {nom}")
     rejouer = True #à réviser l'emplacement
+    historique_nb_parties = []
+    nb_parties= 0
     valide = False
+    historique_mode = []
+    historique_niveau = []
+    historique_reponses_bonnes = []
+    historique_nb_questions = []
+    historique_pourcentage = []
     while not valide:
         if not rejouer:
             valide = True
         else:
             valeur_mode = afficher_mode()
+            historique_mode.append(liste_modes[valeur_mode-1])
             liste_questions = construire_listes(valeur_mode)
             liste_lieux = liste_questions[0]
             liste_capitales = liste_questions[1]
             valeur_niveau = afficher_niveau()
+            historique_niveau.append(liste_niveaux[valeur_niveau-1])
             score = jouer_partie(liste_lieux, liste_capitales, valeur_niveau, nom)
             lieux_rates = score[0]
             capitales_rates = score[1]
             reponse_donnees = score[2]
             reponse_bonnes = score[3]
+            historique_reponses_bonnes.append(reponse_bonnes)
             nombre_questions = score[4]
+            historique_nb_questions.append(nombre_questions)
             pourcentage = calculer_pourcentage(reponse_bonnes,nombre_questions)
+            historique_pourcentage.append(pourcentage)
             afficher_bilan(f"{nom}, votre pointage est de {reponse_bonnes} sur {nombre_questions} ({pourcentage} %).",pourcentage)
             afficher_revision(lieux_rates, reponse_donnees, capitales_rates)
             rejouer = lire_oui_non("Voulez-vous rejouer? (o/n) : ")
+            nb_parties += 1
+            historique_nb_parties.append(nb_parties)
+    afficher_historique(nom, historique_mode, historique_niveau, historique_reponses_bonnes, historique_nb_questions, historique_pourcentage, historique_nb_parties)        
+        
     #afficher_historique()
 ######################################################
 
