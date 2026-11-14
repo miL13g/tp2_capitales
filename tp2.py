@@ -8,7 +8,7 @@ Date      : 03 novembre 2026
 #Import
 
 import random
-random.seed(10)
+random.seed() #testes fait au seed 10
 from colorama import Fore, Style, init
 from utilitaires import lire_entier, lire_reel, lire_texte, lire_oui_non, normaliser
 from donnees_tp2 import PAYS, CAPITALES_PAYS, PROVINCES, CAPITALES_PROVINCES, ETATS, CAPITALES_ETATS
@@ -18,7 +18,7 @@ init(autoreset=True)
 ######################################################
 
 ######################################################
-#Constantes
+#Listes
 liste_standard= []   
 liste_standard_capitales = []
 liste_aventure = []
@@ -27,19 +27,14 @@ lieux_rates = []
 reponse_donnees = []
 capitales_rates = []
 liste_niveaux = ["Facile","Normal","Avancé"]
-#liste_questions = [5,10,15] # pas utilisé?
 liste_modes = ["Standard","Aventure"]
 
 ######################################################
 
 ######################################################
-#Variables
-
-######################################################
-######################################################
 #Fonctions
 def demander_nom():# à documenter
-    nom = input(f"Quel est ton nom jeune bambin? : ")
+    nom = input(f"Votre nom : ")
     return nom
 
 
@@ -95,14 +90,6 @@ def construire_listes(mode):# à documenter
         liste_aventure = PAYS + PROVINCES + ETATS
         liste_aventure_reponse = CAPITALES_PAYS + CAPITALES_PROVINCES + CAPITALES_ETATS
         return liste_aventure, liste_aventure_reponse
-
-liste_retour = construire_listes(1)
-liste_standard = liste_retour[0]
-liste_standard_reponse = liste_retour[1]
-
-liste_retour = construire_listes(2)
-liste_aventure = liste_retour[0]
-liste_aventure_reponse = liste_retour[1]
 
 
 def est_bonne_reponse(reponse, capitale):# à vérifier si le in est un tableau qui vérifie un tableau ou peut être un str qui vérifie dans un tableau
@@ -199,12 +186,12 @@ def jouer_partie(lieux, capitales, nb_questions, nom):# à documenter
                     reponses_rates.append(reponse)
                     valide = True
             except:
-                print("yooo")
-
-    # Créer le bilan ici!!! #
-
+                print("Erreur inattendue... Réinitialisation...")
 
     return lieux_rates, capitales_rates, reponses_rates, nb_bonnes, nb_questions
+    
+
+
 
                 
 
@@ -292,21 +279,13 @@ def main():
             nb_parties += 1
             historique_nb_parties.append(nb_parties)
     afficher_historique(nom, historique_mode, historique_niveau, historique_reponses_bonnes, historique_nb_questions, historique_pourcentage, historique_nb_parties)        
-        
-    #afficher_historique()
+           
 ######################################################
 
 ######################################################
-#Appel main()
 
 main()
+
 ######################################################
 
 
-########## POUR CE SOIR ##########
-# - fonction jouer_partie (meat'n potatoes)
-#  - comprendre la méthode et la bonnne utilisation de random
-#   - la fonction random devra être utilisé pour aller piger 
-#     dans la/les liste(s) de lieux dans une boucle "for i in range"
-# - après ça on vera pcq clairement on peut prendre la nuite la d'ssus
-##################################
