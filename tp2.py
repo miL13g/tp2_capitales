@@ -90,7 +90,15 @@ def afficher_bienvenue():
     print(f"+{'-'*76}+")
 
 
-def construire_listes(mode):# à documenter
+def construire_listes(mode):
+    """"La fonction construit les listes à partir du mode de jeu choisit
+    en appliquant les bonnes listes au bon mode.
+    Args:
+        mode (int): La valeur du mode choisit par le joueur.
+
+    Returns:
+        liste: Retourne les listes contenants les questions et les réponses.
+    """
     if mode == 1:
         return PAYS, CAPITALES_PAYS
     elif mode == 2:
@@ -116,7 +124,16 @@ def est_bonne_reponse(reponse, capitale):
     return False
 
 
-def calculer_pourcentage(nb_bonnes, nb_questions): #utilise la variable du pointage de questions réussies en relation avec le nombre de questions totales
+def calculer_pourcentage(nb_bonnes, nb_questions): 
+    """Calcule le pourcentage des questions réussies.
+
+    Args:
+        nb_bonnes (int): Valeur du nombre de questions réussies.
+        nb_questions (int): Valeur du nombre de questions totales.
+
+    Returns:
+        int: Retourne la moyenne des questions réussies sur 100.
+    """
     pourcentage = (nb_bonnes * 100) // nb_questions
     return pourcentage
 
@@ -157,7 +174,23 @@ def afficher_bilan(message,pourcentage):
 
 
 
-def jouer_partie(lieux, capitales, nb_questions, nom):# à documenter
+def jouer_partie(lieux, capitales, nb_questions, nom):
+    """Est le moteur principale de la méchanique de jeu.
+    Elle demande un nombre de questions selon le mode et le
+    niveau de difficulté choisit par le joueur plus tôt dans le programme.
+
+    Args:
+        lieux (liste): Liste provenant du mode de jeu choisit.
+        capitales (liste): Liste contenant les réponses des questions.
+        nb_questions (int): Nombre de questions posées selon le mode de difficulté choisit
+        nom (str): Le nom du joueur (demandé au début du programme)
+
+    Returns:
+        liste, int: 
+        La fonction retourne les éléments 
+        des questions ratés par le joueur (listes), le nombre de 
+        questions réussies par le joueur ainsi que le nombre de questions totale posées (int). 
+    """
     
     NB_QUESTIONS = [5, 10, 15]
 
@@ -258,10 +291,12 @@ def afficher_historique(nom, modes_joues, niveaux_joues, resultats, totaux, pour
 ######################################################
 #Fonction Main()
 def main():
+    """Jeu questionnaire sur les capitales
+    """
     afficher_bienvenue()
     nom = demander_nom()
     print(f"Salut {nom}")
-    rejouer = True #à réviser l'emplacement
+    rejouer = True 
     historique_nb_parties = []
     nb_parties= 0
     valide = False
