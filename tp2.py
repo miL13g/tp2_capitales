@@ -33,7 +33,12 @@ liste_modes = ["Standard","Aventure"]
 
 ######################################################
 #Fonctions
-def demander_nom():# à documenter
+def demander_nom():
+    """Demande le nom du joueur
+
+    Returns:
+        str: Le nom du joueur
+    """
     nom = input(f"Votre nom : ")
     return nom
 
@@ -76,7 +81,9 @@ def afficher_niveau():
     return choix
 
 
-def afficher_bienvenue():# à documenter
+def afficher_bienvenue():
+    """Affiche la bannière de bienvenue
+    """
     print(f"+{'-'*76}+")
     print(f"|{"Jeu questionnaire - Les Capitales":^76}|")
     print(f"|{"réalisé par Francis et Émile":^76}|")
@@ -92,7 +99,7 @@ def construire_listes(mode):# à documenter
         return liste_aventure, liste_aventure_reponse
 
 
-def est_bonne_reponse(reponse, capitale):# à vérifier si le in est un tableau qui vérifie un tableau ou peut être un str qui vérifie dans un tableau
+def est_bonne_reponse(reponse, capitale):
     """Vérifie sur la réponse est bonne ou mauvaise
 
     Args:
@@ -217,6 +224,17 @@ def afficher_revision(lieux_rates, reponses_donnees, capitales_rates):
 
 
 def afficher_historique(nom, modes_joues, niveaux_joues, resultats, totaux, pourcentages, nb_parties):
+    """Affiche l'historique des pointages des parties jouées ainsi que la meilleure partie jouée.
+
+    Args:
+        nom (str): Le nom du joueur
+        modes_joues (list): liste des modes jouées aux cours des parties
+        niveaux_joues (list): liste des niveaux de difficultés aux cours des parties
+        resultats (list): liste des résultats obtenues du joueur par partie 
+        totaux (list): Nombre total de questions par partie
+        pourcentages (int): Pourcentage de questions réussies par partie
+        nb_parties (list): Nombre de parties jouées
+    """
     print(f"="*78)
     print(f"{"HISTORIQUE DE LA SESSION":^78}")
     print(f"="*78)
@@ -264,6 +282,8 @@ def main():
             valeur_niveau = afficher_niveau()
             historique_niveau.append(liste_niveaux[valeur_niveau-1])
             score = jouer_partie(liste_lieux, liste_capitales, valeur_niveau, nom)
+            #création de la variable score pour recevoir les différentes listes de jouer partie pour les remettre dans des listes distinctes
+            #qui sont créées juste en dessous.
             lieux_rates = score[0]
             capitales_rates = score[1]
             reponse_donnees = score[2]
